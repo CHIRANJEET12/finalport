@@ -232,6 +232,8 @@ export default function About() {
 
 
 
+
+
         </div>
       </motion.div>
     </section>

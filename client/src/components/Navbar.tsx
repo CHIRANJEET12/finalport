@@ -1,17 +1,20 @@
 import { motion } from "framer-motion";
-import { FaGamepad } from "react-icons/fa";
+import { FaAccessibleIcon, FaAcquisitionsIncorporated, FaAdjust, FaGamepad } from "react-icons/fa";
+import { Toggle } from "@/components/ui/toggle"
+
+
 
 export default function Navbar() {
     const navitem: string[] = ["Home", "About", "Projects", "Contact"];
     return (
-        <nav className="bg-black bg-opacity-90 backdrop-blur-sm p-4 flex justify-between items-center border-b border-green-500">
+        <nav className="bg-black bg-opacity-90 backdrop-blur-sm p-4 flex justify-between items-center border-b border-green-500 ">
             <motion.div
                 className="text-green-400 text-2xl font-bold flex items-center gap-2"
                 initial={{ opacity: 0, y: -50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
             >
-                <FaGamepad className="text-green-400 text-3xl mr-2" />
+                <FaAdjust className="text-green-400 text-3xl mr-2" />
                 <h1 className="text-green-400 font-orbitron text-2xl font-bold">
                     CHIRANJEET
                 </h1>
@@ -22,7 +25,7 @@ export default function Navbar() {
                     <motion.a
                         key={item}
                         href={`#${item.toLowerCase()}`}
-                        className="text-gray-300 hover:text-green-400 font-orbitron relative"
+                        className="text-gray-300 hover:text-black hover:bg-green-300 rounded-lg px-2 py-1 font-orbitron relative"
                         whileHover={{ scale: 1.1 }}
                     >
                         {item}
@@ -34,6 +37,7 @@ export default function Navbar() {
                     </motion.a>
                 ))}
             </div>
+
             <ProfileStats />
         </nav>
     );
@@ -48,9 +52,13 @@ function ProfileStats() {
             transition={{ delay: 0.5 }}
         >
             <div className="text-right">
+                
                 <p className="text-green-400 font-orbitron">Level 10 Coder</p>
                 <p className="text-gray-400 text-sm">XP: 1200/1500</p>
             </div>
+            <Toggle className="bg-green-400 text-black w-10 h-10 rounded-full flex items-center justify-center shadow-md hover:shadow-lg hover:bg-green-300 transition duration-300 font-bold">
+  T
+</Toggle>
             <div className="w-10 h-10 rounded-full bg-green-400 flex items-center justify-center">
                 <span className="text-black font-bold">CD</span>
             </div>

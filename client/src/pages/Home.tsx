@@ -50,7 +50,7 @@ export default function Home() {
             initial={{ opacity: 0, y: -40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 1, type: "spring" }}
-            className="font-pressStart2P bg-gradient-to-r from-green-400 to-green-500 bg-clip-text text-transparent mt-6 mb-4 tracking-wider text-[clamp(2rem,6vw,5rem)]"
+            className="font-pressStart2P bg-gradient-to-r from-green-400 to-green-500 bg-clip-text text-transparent mt-1 mb-4 tracking-wider text-[clamp(2rem,6vw,5rem)]"
           >
             CHIRANJEET
           </motion.h1>
@@ -61,7 +61,7 @@ export default function Home() {
             transition={{ delay: 1, duration: 1 }}
             className="text-[clamp(1rem,2vw,1.5rem)] text-green-300 max-w-3xl mx-auto font-audiowide"
           >
-Full-Stack Developer with a <span onClick={preview} className="bg-green-200 text-black border hover:cursor-pointer border-green-300 rounded-lg py-1 px-3 shadow-md hover:bg-green-400 transition duration-300">resume</span>
+Full-Stack Developer with a <span onClick={preview} className="bg-green-200  text-black border hover:cursor-pointer border-green-300 rounded-lg py-1 px-3 shadow-md hover:bg-green-400 transition duration-300">resume</span>
  showcasing expertise in responsive, scalable web apps, integrating creative code and problem-solving skills.          </motion.p>
         </motion.div>
 
