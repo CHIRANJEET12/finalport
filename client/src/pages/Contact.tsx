@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { FaGithub, FaLinkedin, FaTwitter, FaEnvelope } from "react-icons/fa";
+
 import {
   Accordion,
   AccordionContent,
@@ -26,7 +27,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-20 from-black to-green-400 bg-gradient-to-b relative overflow-hidden font-orbitron min-h-screen">
+    <section id="contact" className="py-20 font-mono from-black to-green-400 bg-gradient-to-b relative overflow-hidden font-orbitron min-h-screen">
       <div className="container mx-auto px-4">
         <motion.h2
           initial={{ opacity: 0, y: -20 }}

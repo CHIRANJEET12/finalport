@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import GameTile from "../components/Gametile";
+
 // import ProjectModal from "../components/ProjectModal";
 
 const projects = [
@@ -81,7 +82,7 @@ export default function Projects() {
   };
 
   return (
-    <section id="projects" className="py-20 bg-black relative overflow-hidden font-orbitron min-h-screen">
+    <section id="projects" className="py-20 bg-black font-mono relative overflow-hidden font-orbitron min-h-screen">
 
       {/* Moving Background */}
       <motion.div

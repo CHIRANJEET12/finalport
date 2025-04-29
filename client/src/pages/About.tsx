@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-
 import { FaCode, FaGamepad, FaServer, FaLaptopCode, FaInstagram, FaLinkedin, FaGithub } from "react-icons/fa"; // added icons
 
 export default function About() {
