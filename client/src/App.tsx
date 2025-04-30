@@ -5,6 +5,14 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Projects from "./pages/Project";
 import Contact from "./pages/Contact";
+import { Skeleton } from "@/components/ui/skeleton";
+import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuTrigger,
+} from "@/components/ui/context-menu"
+
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -22,6 +30,8 @@ function App() {
       {isLoading ? (
         <LoadingScreen onLoaded={() => setIsLoading(false)} />
       ) : (
+        <ContextMenu>
+        <ContextMenuTrigger>
         <div>
           <Navbar isDark={isDark} toggleTheme={toggleTheme} />
           <main className="container">
@@ -31,6 +41,15 @@ function App() {
             <Contact />
           </main>
         </div>
+        </ContextMenuTrigger>
+
+        <ContextMenuContent>
+            <ContextMenuItem><a href="#home">Home</a></ContextMenuItem>
+            <ContextMenuItem><a href="#about">about</a></ContextMenuItem>
+            <ContextMenuItem><a href="#projects">project</a></ContextMenuItem>
+            <ContextMenuItem><a href="#contact">contact</a></ContextMenuItem>
+          </ContextMenuContent>
+        </ContextMenu>
       )}
     </div>
   );

@@ -1,4 +1,37 @@
 import { motion } from "framer-motion";
+import { TrendingUp } from "lucide-react";
+import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
+import * as React from "react";
+import { Label, Pie, PieChart } from "recharts";
+import {useMemo} from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer"
+import { Button } from "@/components/ui/button";
+
+import {
+  ChartConfig,
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "@/components/ui/chart";
+
 import { FaCode, FaGamepad, FaServer, FaLaptopCode, FaInstagram, FaLinkedin, FaGithub } from "react-icons/fa"; // added icons
 
 export default function About() {
@@ -16,6 +49,50 @@ export default function About() {
     medium: 55,
     hard: 3
   };
+
+  const leetCodeData = [
+    { name: "Easy", value: leetcodeStats.easy },
+    { name: "Medium", value: leetcodeStats.medium },
+    { name: "Hard", value: leetcodeStats.hard },
+  ];
+
+  const language = [
+    { name: "Python", value: 85 },
+    { name: "JavaScript", value: 75 },
+    { name: "C++", value: 65 },
+    { name: "Java", value: 70 },
+    { name: "C#", value: 60 },
+    { name: "HTML/CSS", value: 80 },
+    { name: "SQL", value: 55 },
+    { name: "React", value: 70 }, 
+    { name: "Node.js", value: 65 },
+    { name: "Express", value: 60 },
+  ]
+
+  const chartConfig = {
+    value: {
+      label: "value",
+      color: "hsl(var(--chart-1))",
+    },
+  } satisfies ChartConfig
+
+  const chartConfig1 = {
+    value: {
+      label: "Proficiency",
+      color: "hsl(var(--chart-1))",
+    },
+    ...Object.fromEntries(
+      language.map((lang,index)=>[
+        lang.name,
+        {
+          Label:lang.name,
+          color: `hsl(${index * 30}, 100%, 50%)`,
+          value:lang.value,
+        }
+      ])
+    )
+  } satisfies ChartConfig
+
 
   return (
     <section id="about" className="py-20 bg-black relative overflow-hidden font-orbitron">
@@ -197,37 +274,126 @@ export default function About() {
           </motion.div>
 
 
-  {/* LeetCode Stats Card */}
-<div className="bg-black bg-opacity-70 p-6 rounded-xl border border-green-400 shadow-lg shadow-green-500/30 w-80">
-  <h3 className="text-xl font-orbitron text-green-400 mb-4 tracking-wide text-center">
-    LeetCode STATS
-  </h3>
+<Card className="bg-gradient-to-br border-green-400 from-black via-green-800 to-gray-900 text-white shadow-2xl border  rounded-2xl">
+  <CardHeader>
+    <CardTitle className="text-green-400 text-2xl font-bold">Code Trivia Stats</CardTitle>
+    <CardDescription className="text-sm text-gray-500 mt-1">
+      Did you know? Python was named after Monty Python!
+    </CardDescription>
+  </CardHeader>
 
-  {/* Total Stats */}
-  <h3 className="text-lg font-orbitron text-green-400 mb-4 text-center">
-    <span className="text-green-500 text-lg">Total</span>
-    <br />
-    <span className="text-base">{leetcodeStats.easy + leetcodeStats.medium + leetcodeStats.hard}</span>
-  </h3>
+  <CardContent className="mt-4">
+    <ChartContainer config={chartConfig}>
+      <BarChart accessibilityLayer data={leetCodeData}>
+        <CartesianGrid vertical={false} strokeDasharray="3 3" stroke="#4ade80" />
+        <XAxis
+          dataKey="name"
+          tickLine={false}
+          tickMargin={10}
+          axisLine={false}
+          tick={{ fill: "#a7f3d0", fontWeight: "bold" }}
+          tickFormatter={(value) => value.slice(0, 7)}
+        />
+        <ChartTooltip
+          cursor={{ fill: "#1f2937", opacity: 0.5 }}
+          content={<ChartTooltipContent hideLabel />}
+        />
+        <Bar dataKey="value" fill="#22c55e" radius={8} />
+      </BarChart>
+    </ChartContainer>
+  </CardContent>
 
-  {/* Breakdown of Stats */}
-  <div className="space-y-3 text-center text-green-200">
-    <div className="flex justify-between text-sm">
-      <span>Easy</span>
-      <span>{leetcodeStats.easy}</span>
+  <CardFooter className="flex-col items-start gap-2 text-sm mt-4 border-t border-gray-700 pt-4">
+    <div className="flex gap-2 font-medium leading-none text-green-300">
+      Fun Fact: The first computer bug was a real moth!
     </div>
-
-    <div className="flex justify-between text-sm">
-      <span>Medium</span>
-      <span>{leetcodeStats.medium}</span>
+    <div className="leading-none text-gray-400">
+      Showing coding trivia instead of boring data 
     </div>
+  </CardFooter>
+</Card>
 
-    <div className="flex justify-between text-sm">
-      <span>Hard</span>
-      <span>{leetcodeStats.hard}</span>
-    </div>
-  </div>
-</div>
+{/* <Drawer>
+  <DrawerTrigger className="px-4 py-2 w-36 bg-green-500 text-white rounded-md shadow hover:bg-green-600 transition">
+    Open
+  </DrawerTrigger>
+  
+  <DrawerContent className="w-full max-w-sm mx-auto p-4 bg-black rounded-t-2xl shadow-lg">
+    <DrawerHeader className="space-y-1">
+      <DrawerTitle className="text-lg font-semibold">Are you absolutely sure?</DrawerTitle>
+      <DrawerDescription className="text-sm text-gray-600">
+        This action cannot be undone.
+      </DrawerDescription>
+    </DrawerHeader>
+
+    <DrawerFooter className="flex justify-end gap-2">
+      <Button className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md">
+        Submit
+      </Button>
+      <DrawerClose>
+        <Button variant="outline" className="px-4 py-2 rounded-md">
+          Cancel
+        </Button>
+      </DrawerClose>
+    </DrawerFooter>
+  </DrawerContent>
+</Drawer> */}
+
+
+<Card className="flex flex-col from-black via-green-800 to-gray-900 bg-gradient-to-br border-green-400 shadow-2xl border rounded-2xl">
+      <CardHeader className="items-center pb-0">
+        <CardTitle>Pie Chart - Donut with Text</CardTitle>
+        <CardDescription>January - June 2024</CardDescription>
+      </CardHeader>
+      <CardContent className="flex-1 pb-0">
+        <ChartContainer
+          config={chartConfig}
+          className="mx-auto aspect-square max-h-[250px]"
+        >
+          <PieChart>
+            <ChartTooltip
+              cursor={false}
+              content={<ChartTooltipContent hideLabel />}
+            />
+            <Pie 
+            className="text-green-400"
+              data={language}
+              dataKey="value"
+              nameKey="name"
+              innerRadius={60}
+              strokeWidth={5}
+            >
+              <Label
+                content={({ viewBox }) => {
+                  if (viewBox && "cx" in viewBox && "cy" in viewBox) {
+                    return (
+                      <text
+                        x={viewBox.cx}
+                        y={viewBox.cy}
+                        textAnchor="middle"
+                        dominantBaseline="middle"
+                        className="text-green-400 font-bold text-2xl"
+                      >
+
+                      </text>
+                    )
+                  }
+                }}
+              />
+            </Pie>
+          </PieChart>
+        </ChartContainer>
+      </CardContent>
+      <CardFooter className="flex-col gap-2 text-sm">
+        <div className="flex items-center gap-2 font-medium leading-none">
+          Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
+        </div>
+        <div className="leading-none text-muted-foreground">
+          Showing total visitors for the last 6 months
+        </div>
+      </CardFooter>
+    </Card>
+
 
 
 
